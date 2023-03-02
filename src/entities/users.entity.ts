@@ -1,7 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, Column } from "typeorm"
 
 @Entity("users")
-export class Users {
+export class User {
 
     @PrimaryGeneratedColumn("increment")
     id: number

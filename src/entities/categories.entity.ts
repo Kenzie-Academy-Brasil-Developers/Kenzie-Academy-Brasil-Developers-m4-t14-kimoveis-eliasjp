@@ -1,7 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column } from "typeorm"
 
 @Entity("categories")
-export class Categories{
+export class Category{
 
     @PrimaryGeneratedColumn("increment")
     id: number
