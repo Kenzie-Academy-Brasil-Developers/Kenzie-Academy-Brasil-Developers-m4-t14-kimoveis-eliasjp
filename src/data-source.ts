@@ -4,8 +4,8 @@ import "reflect-metadata"
 import path from "path"
 
 function DataSourceConfig (): DataSourceOptions{
-    const entitiesPath = path.join(__dirname, "/entities/*.ts")
-    const migrationsPath = path.join(__dirname, "/migrations/*.ts")
+    const entitiesPath = path.join(__dirname, "/entities/**.ts")
+    const migrationsPath = path.join(__dirname, "/migrations/**.ts")
 
     if (process.env.NODE_ENV === "test"){
         return {
