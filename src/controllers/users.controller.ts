@@ -1,9 +1,16 @@
 import { Request, Response } from "express"
 import { ICreateUserReturn } from "../interfaces/users.interface"
 import { createUserService } from "../services/users/createUser.service"
+import { readUserService } from "../services/users/readUser.service"
 
 export async function createUserController (request: Request, response: Response): Promise<Response> {
     const serviceResult: ICreateUserReturn | Response = await createUserService(request, response)
 
     return response.status(201).json(serviceResult)
+}
+
+export async function readUserController (request: Request, response: Response): Promise<Response> {
+    const serviceResult = await readUserService(request)
+
+    return response.status(200).json(serviceResult)
 }
