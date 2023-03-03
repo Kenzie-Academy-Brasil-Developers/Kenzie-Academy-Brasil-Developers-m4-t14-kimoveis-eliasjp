@@ -4,13 +4,14 @@ import { User } from "../../entities"
 import { AppError } from "../../errors"
 import { createUserReturnSchema } from "../../schemas/users.schema"
 
-export async function createUserService (request: any) {
+export async function createUserService (request: any, response: Response) {
     const userRepo = AppDataSource.getRepository(User)
 
     const findEmail = await userRepo.findOneBy({ email: request.body.email })
     
     if (findEmail){
-        throw new AppError("Email already exists", 409)
+        console.log(`oi`)
+        return response.status(409).json({ message: "Email already exists"})
     }
 
     const createUser = userRepo.create(request.body)
