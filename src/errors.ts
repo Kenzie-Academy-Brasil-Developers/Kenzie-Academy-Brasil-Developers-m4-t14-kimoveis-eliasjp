@@ -10,16 +10,13 @@ class AppError extends Error {
 }
 
 function handleError (error: any, request: Request, response: Response, _: NextFunction){
-    console.log(`handleError called`)
     if (error instanceof AppError){
-        console.log(`handleError (AppError) called`)
         return response.status(error.statusCode).json({ message: error.message })
     }
     if (error instanceof ZodError){
-        console.log(`handleError (ZodError) called`)
         return response.status(400).json({ message: error.flatten().fieldErrors })
     }
-    console.log(`handleError (anything else) called`)
+    console.log(error.message)
     return response.status(500).json({ message: "Server internal error" })
 }
 
