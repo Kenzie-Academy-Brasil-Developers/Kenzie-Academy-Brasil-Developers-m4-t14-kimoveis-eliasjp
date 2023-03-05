@@ -28,7 +28,7 @@ export async function loginService (request: any){
         },
         String(process.env.SECRET_KEY),
         {
-            expiresIn: "5min",
+            expiresIn: "1h",
             subject: String(findUser.id)
         }
     )

@@ -5,15 +5,12 @@ import "dotenv"
 
 
 export function checkAdmin (request: Request, response: Response, next: NextFunction) {
-    const tokenString: string | undefined = request.headers.authorization?.split(" ")[1]
-    if (!tokenString){
-        throw new AppError("Missing token", 403)
-    }
-
-    const decoded = decode(tokenString, { json: true })
+    const decoded = decode(request.token, { json: true })
     if (!decoded!.admin){
         throw new AppError("Insufficient permission", 403)
     }
+    request.admin = decoded!.admin
+    request.id = decoded!.id
 
     return next()
 }
