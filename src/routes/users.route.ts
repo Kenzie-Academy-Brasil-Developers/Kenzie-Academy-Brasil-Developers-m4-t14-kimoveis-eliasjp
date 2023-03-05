@@ -1,5 +1,5 @@
 import { Router } from "express"
-import { createUserController, readUserController, updateUserController } from "../controllers/users.controller"
+import { createUserController, readUserController, softDeleteUserController, updateUserController } from "../controllers/users.controller"
 import { checkAdmin } from "../middlewares/checkAdmin.middleware"
 import { checkToken } from "../middlewares/checkToken.middleware"
 import { userExists } from "../middlewares/userExists.middleware"
@@ -11,3 +11,4 @@ export const usersRoutes: Router = Router()
 usersRoutes.post("", verifySchema(createUserSchema), createUserController)
 usersRoutes.get("", checkToken, checkAdmin, readUserController)
 usersRoutes.patch("/:id", checkToken, userExists, verifySchema(updateUserSchema), updateUserController)
+usersRoutes.delete("/:id", checkToken, userExists, softDeleteUserController)

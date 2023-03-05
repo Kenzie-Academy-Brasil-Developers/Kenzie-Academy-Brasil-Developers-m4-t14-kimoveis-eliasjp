@@ -4,7 +4,7 @@ import { AppError } from "../errors"
 
 export const createUserSchema = z.object({
     name: z.string().max(45),
-    email: z.string().max(45),
+    email: z.string().email().max(45),
     admin: z.boolean().default(false),
     password: z.string().max(120).transform((pass) => hashSync(pass, 10))
 })
