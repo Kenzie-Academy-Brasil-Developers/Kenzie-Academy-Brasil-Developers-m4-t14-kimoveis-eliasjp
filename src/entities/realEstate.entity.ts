@@ -23,10 +23,10 @@ export class RealEstate {
     @UpdateDateColumn()
     updatedAt: Date
 
-    @OneToOne(() => Address)
+    @OneToOne(() => Address, (adr) => adr.id)
     @JoinColumn()
     address: Address
 
-    @ManyToOne(() => Category)
+    @ManyToOne(() => Category, (cate) => cate.id)
     category: Category
 }
