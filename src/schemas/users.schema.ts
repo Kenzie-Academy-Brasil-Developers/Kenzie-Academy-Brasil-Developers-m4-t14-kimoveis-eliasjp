@@ -10,12 +10,12 @@ export const createUserSchema = z.object({
 })
 
 export const fullUserSchema = createUserSchema.extend({
-    createAt: z.date(),
-    updateAt: z.date(),
-    deleteAt: z.date().nullish()
+    createdAt: z.string(),
+    updatedAt: z.string(),
+    deletedAt: z.string().nullish()
 })
 
-export const createUserReturnSchema = fullUserSchema.omit({ password: true })
+export const createUserReturnSchema = fullUserSchema.omit({ password: true }).extend({ id: z.number() })
 
 export const updateUserSchema = z.object({
     name: z.string().max(45).optional(),

@@ -18,12 +18,12 @@ export class User {
     @Column({ type: "varchar", length:120 })
     password: string
 
-    @CreateDateColumn()
-    createAt: Date
+    @CreateDateColumn({ type: "date"})
+    createdAt: string
 
-    @UpdateDateColumn()
-    updateAt: Date
+    @UpdateDateColumn({ type: "date"})
+    updatedAt: string
 
-    @DeleteDateColumn()
-    deleteAt: Date
+    @DeleteDateColumn({ type: "date"})
+    deletedAt: string
 }
