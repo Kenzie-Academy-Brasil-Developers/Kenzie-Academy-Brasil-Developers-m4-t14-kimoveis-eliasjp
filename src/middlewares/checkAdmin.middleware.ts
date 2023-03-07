@@ -9,6 +9,7 @@ export function checkAdmin (request: Request, response: Response, next: NextFunc
     if (!decoded!.admin){
         throw new AppError("Insufficient permission", 403)
     }
+    
     request.admin = decoded!.admin
     request.id = decoded!.id
     return next()
