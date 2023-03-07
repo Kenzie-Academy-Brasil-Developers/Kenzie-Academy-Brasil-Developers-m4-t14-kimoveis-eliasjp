@@ -11,6 +11,5 @@ export function checkAdmin (request: Request, response: Response, next: NextFunc
     }
     request.admin = decoded!.admin
     request.id = decoded!.id
-
     return next()
 }

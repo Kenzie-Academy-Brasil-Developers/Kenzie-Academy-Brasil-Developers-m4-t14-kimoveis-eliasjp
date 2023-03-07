@@ -8,27 +8,19 @@ export async function createRealEstateService (request: any){
     const addressRepo = AppDataSource.getRepository(Address)
     const categoryRepo = AppDataSource.getRepository(Category)
 
-    console.log(request.body)
     const { address, categoryId, ...restObject } = request.body
 
-    const findAddress = await addressRepo.findOneBy({ ...address })
-    console.log(findAddress)
-    if (findAddress){
-        throw new AppError("Address already exists", 409)
+    const responseAddress = await addressRepo.save(address)
+    const getCategory = await categoryRepo.findOneBy({ id: categoryId })
+    
+    const responseRealEstate = await realEstateRepo.save({ ...restObject, address: responseAddress, category: getCategory })
+    omitEstateAddressCategory.parse(responseRealEstate)
+
+    responseRealEstate.category = getCategory
+    
+    if (address.number){
+        responseRealEstate.address = responseAddress
     }
-    
-    // const responseRealEstate = await realEstateRepo.save(request.body)
-    // omitEstateAddressCategory.parse(responseRealEstate)
 
-
-    // const responseAddress = await addressRepo.save(address)
-
-    // const getCategory = await categoryRepo.findOneBy({ id: categoryId })
-    // responseRealEstate.category = getCategory
-    
-    // if (address.number){
-    //     responseRealEstate.address = responseAddress
-    // }
-
-    // return responseRealEstate
+    return responseRealEstate
 }
