@@ -23,6 +23,5 @@ export function checkToken (request: Request, response: Response, next: NextFunc
     request.admin = tokenDecoded!.admin
     request.id = Number(tokenDecoded!.sub)
 
-    
     return next()
 }

@@ -1,12 +1,21 @@
-import { Request, Response, NextFunction } from "express"
-import { AppError } from "../errors"
-import { addressSchema } from "../schemas/address.schema"
+import { NextFunction, Request, Response } from "express";
+import { AppDataSource } from "../data-source";
+import { Address } from "../entities";
+import { AppError } from "../errors";
 
-export function verifyAddressSchema (request: Request, response: Response, next: NextFunction): void{
-    if (!request.body.address){
-        throw new AppError("Address property must exists", 400)
+export async function verifyAddress (request: Request, response: Response, next: NextFunction){
+    const { address, categoryId, ...restObject } = request.body
+
+    if (!address){
+        return next()
     }
-    addressSchema.parse(request.body.address)
+
+    const addressRepo = AppDataSource.getRepository(Address)
+    const findAddress = await addressRepo.findOneBy({ ...address })
+    if (findAddress){
+        throw new AppError("Address already exists", 409)
+    }
+
 
     return next()
 }
