@@ -13,10 +13,12 @@ export async function readByIdCategoriesService (request: any){
 
     const realEstateConfig = ["id", "size", "sold", "value", "createdAt", "updatedAt"]
 
-    const allRealEstateWithCategory = await realEstateRepo.createQueryBuilder("re").where("re.categoryId = :id", { id: request.params.id}).select(realEstateConfig).execute()
+    const allRealEstateWithCategory = await realEstateRepo.createQueryBuilder("re").where("re.categoryId = :id", { id: request.params.id})
+    .getMany()
+
     const results = {
         ...checkCategoryExistance,
-        RealEstate: allRealEstateWithCategory
+        realEstate: allRealEstateWithCategory
     }
 
     return results

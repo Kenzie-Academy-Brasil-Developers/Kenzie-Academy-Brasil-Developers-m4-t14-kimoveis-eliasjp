@@ -3,7 +3,7 @@ import { addressSchema } from "./address.schema"
 
 export const realEstateSchema = z.object({
     sold: z.boolean().default(false),
-    value: z.union([z.string(), z.number()]),
+    value: z.number().positive().or(z.string()),
     size: z.number().positive(),
     address: addressSchema,
     categoryId: z.number().positive().nullish()

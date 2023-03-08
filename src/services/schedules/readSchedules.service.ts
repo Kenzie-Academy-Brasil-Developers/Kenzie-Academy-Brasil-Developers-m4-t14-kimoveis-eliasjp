@@ -19,10 +19,6 @@ export async function readSchedulesService (request: any){
     const scheduleList = await scheduleRepo.createQueryBuilder("sc")
     .where("sc.realEstate = :id", { id: request.params.id })
     .leftJoinAndSelect("sc.user", "user")
-    // .leftJoin("sc.realEstate", "re")
-    // .select("re.*")
-    // .leftJoin("sc.user", "us")
-    // .select("us.*")
     .getMany()
 
     const responseReturn = {

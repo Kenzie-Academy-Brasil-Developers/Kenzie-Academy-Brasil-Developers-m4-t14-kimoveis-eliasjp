@@ -1,6 +1,5 @@
 import { AppDataSource } from "../../data-source"
 import { Address, Category, RealEstate } from "../../entities"
-import { AppError } from "../../errors"
 import { omitEstateAddressCategory } from "../../schemas/realEstate.schema"
 
 export async function createRealEstateService (request: any){
