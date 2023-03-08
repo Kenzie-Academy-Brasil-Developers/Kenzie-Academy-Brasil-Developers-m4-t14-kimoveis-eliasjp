@@ -11,13 +11,15 @@ export async function loginService (request: any){
     const findUser = await userRepo.findOneBy({ email: request.body.email })
 
     if (!findUser){
-        throw new AppError("User not found.", 404)
+        throw new AppError("Invalid credentials", 401)
+    }
+    
+    if (findUser.deletedAt){
+        throw new AppError("Invalid credentials", 401)
     }
 
-    const checkPassword = await compare(String(request.body.password), String(findUser.password))
-
-    if (!checkPassword){
-        throw new AppError("Wrong email or password", 401)
+    if (findUser.password !== request.body.password){
+        throw new AppError("Invalid credentials", 401)
     }
 
     const token = sign(
