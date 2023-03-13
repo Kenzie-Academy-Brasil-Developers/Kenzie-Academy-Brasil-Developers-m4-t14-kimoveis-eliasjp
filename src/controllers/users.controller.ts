@@ -20,7 +20,7 @@ export async function readUserController (request: Request, response: Response):
 export async function updateUserController (request: Request, response: Response): Promise<Response> {
     const serviceResult: ICreateUserReturn = await updateUserService(request)
 
-    return response.status(200).json({...serviceResult})
+    return response.status(200).json(serviceResult)
 }
 
 export async function softDeleteUserController (request: Request, response: Response): Promise<Response> {
