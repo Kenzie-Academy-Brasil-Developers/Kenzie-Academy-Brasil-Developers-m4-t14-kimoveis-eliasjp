@@ -1,4 +1,5 @@
 import { Request, Response } from "express"
+import { IRealEstateReturn } from "../interfaces/realEstate.interface"
 import { createRealEstateService } from "../services/realEstate/createRealEstate.services"
 import { readRealEstateService } from "../services/realEstate/readRealEstate.services"
 

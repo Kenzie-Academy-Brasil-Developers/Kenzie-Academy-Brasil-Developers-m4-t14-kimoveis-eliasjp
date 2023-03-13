@@ -1,5 +1,7 @@
 import { AppDataSource } from "../../data-source"
 import { Address, Category, RealEstate } from "../../entities"
+import { IAddressReturn } from "../../interfaces/address.interface"
+import { ICategoryReturn } from "../../interfaces/category.interface"
 import { omitEstateAddressCategory } from "../../schemas/realEstate.schema"
 
 export async function createRealEstateService (request: any){
@@ -9,8 +11,8 @@ export async function createRealEstateService (request: any){
 
     const { address, categoryId, ...restObject } = request.body
 
-    const responseAddress = await addressRepo.save(address)
-    const getCategory = await categoryRepo.findOneBy({ id: categoryId })
+    const responseAddress: IAddressReturn = await addressRepo.save(address)
+    const getCategory: ICategoryReturn | null = await categoryRepo.findOneBy({ id: categoryId })
     
     const responseRealEstate = await realEstateRepo.save({ ...restObject, address: responseAddress, category: getCategory })
     omitEstateAddressCategory.parse(responseRealEstate)
