@@ -13,7 +13,6 @@ export function checkToken (request: Request, response: Response, next: NextFunc
 
     verify(request.token, String(process.env.SECRET_KEY), (error: any) => {
         if (error){
-            console.log(error.message)
             throw new AppError(error.message, 401)
         }
     })

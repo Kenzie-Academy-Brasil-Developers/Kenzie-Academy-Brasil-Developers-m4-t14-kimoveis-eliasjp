@@ -1,12 +1,14 @@
 import { AppDataSource } from "../../data-source"
 import { RealEstate, Schedule } from "../../entities"
 import { AppError } from "../../errors"
+import { IRealEstate } from "../../interfaces/realEstate.interface"
+import { ISchedule, IScheduleReturn } from "../../interfaces/schedule.interface"
 
 export async function createScheduleService(request: any){
     const scheduleRepo = AppDataSource.getRepository(Schedule)
     const realEstateRepo = AppDataSource.getRepository(RealEstate)
 
-    const findRealEstate = await realEstateRepo.createQueryBuilder("sc")
+    const findRealEstate: IRealEstate | null = await realEstateRepo.createQueryBuilder("sc")
     .where(`sc.id = :id`, { id: request.body.realEstateId })
     .getOne()
 

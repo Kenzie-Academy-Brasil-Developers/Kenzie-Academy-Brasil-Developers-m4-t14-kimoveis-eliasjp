@@ -22,7 +22,7 @@ export async function loginService (request: any){
         throw new AppError("Invalid credentials", 401)
     }
 
-    const token = sign(
+    const token: string = sign(
         {
             email: request.body.email,
             admin: findUser.admin

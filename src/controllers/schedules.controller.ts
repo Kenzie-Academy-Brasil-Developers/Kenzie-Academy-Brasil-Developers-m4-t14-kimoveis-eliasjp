@@ -3,7 +3,7 @@ import { createScheduleService } from "../services/schedules/createSchedule.serv
 import { readSchedulesService } from "../services/schedules/readSchedules.service"
 
 export async function createScheduleController (request: Request, response: Response): Promise<Response>{
-    const serviceResult = await createScheduleService(request)
+    const serviceResult: { message: string } = await createScheduleService(request)
 
     return response.status(201).json(serviceResult)
 }
