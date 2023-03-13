@@ -12,20 +12,19 @@ export async function createUserController (request: Request, response: Response
 }
 
 export async function readUserController (request: Request, response: Response): Promise<Response> {
-    const serviceResult = await readUserService(request)
+    const serviceResult: ICreateUserReturn[] = await readUserService(request)
 
     return response.status(200).json(serviceResult)
 }
 
 export async function updateUserController (request: Request, response: Response): Promise<Response> {
-    const serviceResult = await updateUserService(request)
-    console.log(serviceResult)
+    const serviceResult: ICreateUserReturn = await updateUserService(request)
 
     return response.status(200).json({...serviceResult})
 }
 
 export async function softDeleteUserController (request: Request, response: Response): Promise<Response> {
-    const serviceResult = await softDeleteUserService(request)
+    const serviceResult: void = await softDeleteUserService(request)
 
     return response.status(204).json(serviceResult)
 }
